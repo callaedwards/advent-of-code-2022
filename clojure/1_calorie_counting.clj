@@ -1,22 +1,26 @@
-(ns advent-of-code-2022.1-calorie-counting)
-	;(:require [advent-of-code-2022.common :as common]))
+(ns advent-of-code-2022.1-calorie-counting
+	(:require [clojure.java.io :as io]
+						[clojure.string :as str]))
 
-(defn Solution[]
-	; (->
-	; 	(slurp "inputs/day1.txt")
-	; 	(clojure.string/split #"\n\n")
+	
+(defn str-to-ints
+  [arr]
+  (map #(Integer/parseInt %) arr))
 
-	; )
-	(def input (clojure.string/split (slurp "inputs/day1.txt") #"\n\n"))
-	(doseq [elf input]
-		(let [i 0])
-		(doseq [cal elf]
-			(+ i (read-string cal))
-		)
-		(println(i))
-	)
+(defn sum-calories[]
+	(let [input (-> (io/as-relative-path "../inputs/day1.txt")
+									slurp
+									(str/split #"\n\n"))]
+		(->> input
+			(map #(str/split % #"\n"))
+			(map str-to-ints)
+			(map #(reduce + %))
+			sort
+			reverse
+			(take 3))))
 
-;			(println (reduce + )))
-)
+(defn solution[]
+	(println (first (sum-calories)))
+	(println (reduce + (sum-calories))))
 
-(Solution)
+(solution)
