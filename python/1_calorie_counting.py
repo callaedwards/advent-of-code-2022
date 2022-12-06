@@ -2,15 +2,15 @@ from common import get_input_file_path
 from typing import List
 
 
-def find_max_calories(elves):
+def find_max_calories(elves: List[List[int]]) -> int:
 	return max(sum_calories(elves))
 
 
-def sum_calories(elves):
+def sum_calories(elves: List[List[int]]) -> List[int]:
 	return [sum(elf) for elf in elves]
 
 
-def find_top_3_calories(elves):
+def find_top_3_calories(elves: List[List[int]]) -> int:
 	calorie_list = sum_calories(elves)
 	total = 0
 	for _ in range(3):
